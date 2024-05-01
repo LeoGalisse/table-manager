@@ -16,6 +16,7 @@ interface Column {
 }
 
 interface TableContextType {
+  title: string
   columns: Column[]
   activeColumn: number | null
   isSelected: boolean
@@ -32,6 +33,7 @@ interface TableContextType {
   addRow?: () => void
   moveColumn?: (index: number, operation: Operation) => void
   handleColumnSelection?: (event: MouseEvent, index: number) => void
+  changeTitle: (newTitle: string) => void
 }
 
 interface TableProviderProps {
@@ -44,6 +46,7 @@ export function TableProvider({ children }: TableProviderProps) {
   const [columns, setColumns] = useState<Column[]>([
     { header: 'Column 1', isSelected: false, row: [] },
   ])
+  const [title, setTitle] = useState('Dynamic Table #1')
   const [activeColumn, setActiveColumn] = useState<number | null>(null)
   const columnsRef = useRef<Array<HTMLDivElement | null>>([])
 
@@ -146,9 +149,14 @@ export function TableProvider({ children }: TableProviderProps) {
     [activeColumn, columns],
   )
 
+  const changeTitle = useCallback((newTitle: string) => {
+    setTitle(newTitle)
+  }, [])
+
   return (
     <TableContext.Provider
       value={{
+        title,
         columns,
         activeColumn,
         isSelected: false,
@@ -158,6 +166,7 @@ export function TableProvider({ children }: TableProviderProps) {
         addRow,
         moveColumn,
         handleColumnSelection,
+        changeTitle,
       }}
     >
       {children}
