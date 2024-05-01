@@ -20,6 +20,7 @@ interface TableContextType {
   columns: Column[]
   activeColumn: number | null
   isSelected: boolean
+  columnsRef: React.MutableRefObject<Array<HTMLDivElement | null>>
   updateColumnHeader: (event: ChangeEvent<HTMLInputElement>) => void
   updateRowContent?: (
     event: ChangeEvent<HTMLInputElement>,
@@ -28,8 +29,8 @@ interface TableContextType {
   ) => void
   addColumn?: () => void
   addRow?: () => void
-  moveColumn?: (index: number, operation: Operation) => void
-  handleColumnSelection?: (event: MouseEvent, index: number) => void
+  moveColumn: (index: number, operation: Operation) => void
+  handleColumnSelection: (event: React.MouseEvent, index: number) => void
   changeTitle: (newTitle: string) => void
 }
 
@@ -83,7 +84,7 @@ export function TableProvider({ children }: TableProviderProps) {
     newColumns.push({
       header: `Column ${columns.length + 1}`,
       isSelected: false,
-      row: [],
+      row: columns[0].row.map(() => ''),
     })
 
     setColumns(newColumns)
@@ -123,7 +124,7 @@ export function TableProvider({ children }: TableProviderProps) {
   )
 
   const handleColumnSelection = useCallback(
-    async (event: MouseEvent, index: number) => {
+    async (event: React.MouseEvent, index: number) => {
       if (
         columnsRef.current[index] &&
         columnsRef.current[index]!.contains(event.target as Node)
@@ -161,6 +162,7 @@ export function TableProvider({ children }: TableProviderProps) {
         columns,
         activeColumn,
         isSelected: false,
+        columnsRef,
         updateColumnHeader,
         updateRowContent,
         addColumn,
