@@ -8,9 +8,9 @@ import {
   Label,
   Nav,
   Text,
-} from './TableSideBar'
+} from '../SideBar'
 import { Pencil, ChevronUp, ChevronDown } from 'lucide-react'
-import { TableContext } from '../../context/TableContext'
+import { TableContext } from '../../../context/TableContext'
 
 export default function TableSideBar() {
   const [isClicked, setIsClicked] = useState(false)

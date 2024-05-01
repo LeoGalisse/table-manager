@@ -20,10 +20,7 @@ interface TableContextType {
   columns: Column[]
   activeColumn: number | null
   isSelected: boolean
-  updateColumnHeader?: (
-    event: ChangeEvent<HTMLInputElement>,
-    index: number,
-  ) => void
+  updateColumnHeader: (event: ChangeEvent<HTMLInputElement>) => void
   updateRowContent?: (
     event: ChangeEvent<HTMLInputElement>,
     columnIndex: number,
@@ -51,14 +48,18 @@ export function TableProvider({ children }: TableProviderProps) {
   const columnsRef = useRef<Array<HTMLDivElement | null>>([])
 
   const updateColumnHeader = useCallback(
-    async (event: ChangeEvent<HTMLInputElement>, index: number) => {
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      if (activeColumn === null) {
+        return
+      }
+
       const newColumns = [...columns]
 
-      newColumns[index].header = event.target.value
+      newColumns[activeColumn].header = event.target.value
 
       setColumns(newColumns)
     },
-    [columns],
+    [columns, activeColumn],
   )
 
   const updateRowContent = useCallback(

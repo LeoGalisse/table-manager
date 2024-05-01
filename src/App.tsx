@@ -1,10 +1,10 @@
 import { Container } from './App'
-import TableSideBar from './components/table-sidebar/TableSideBar.tsx'
+import ColumnSideBar from './components/sidebar/column-sidebar/ColumnSideBar.tsx'
 
 export default function App() {
   return (
     <Container>
-      <TableSideBar />
+      <ColumnSideBar />
     </Container>
   )
 }
