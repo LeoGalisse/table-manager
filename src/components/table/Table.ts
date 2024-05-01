@@ -42,13 +42,17 @@ export const Column = styled.div<{ isSelected: boolean }>`
 export const TableContainer = styled.table`
   flex: 1;
   width: 100%;
+  display: flex;
+  flex-direction: column;
 `
 
-export const TRow = styled.tr<{ isSelected: boolean }>`
+export const TRow = styled.tr<{ isSelected: boolean; index?: number }>`
   display: flex;
   width: 100%;
 
   background-color: ${({ isSelected }) => (isSelected ? '#60a5fa' : '#e2e8f0')};
+  border-left: ${({ index }) =>
+    index && index !== 0 ? '1px solid #cbd5e1' : 'none'};
 `
 
 export const THeader = styled.th<{ isSelected: boolean }>`

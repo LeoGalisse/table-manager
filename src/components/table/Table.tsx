@@ -32,7 +32,7 @@ export default function Table() {
               onClick={(event) => table.handleColumnSelection(event, index)}
             >
               <TableContainer>
-                <TRow isSelected={column.isSelected}>
+                <TRow isSelected={column.isSelected} index={index}>
                   <THeader isSelected={column.isSelected}>
                     {column.header}
                     <ButtonContainer

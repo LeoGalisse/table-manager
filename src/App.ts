@@ -16,3 +16,11 @@ export const Container = styled.main`
     50px 50px;
   background-size: 10px 10px;
 `
+
+export const Drag = styled.div<{ x: number; y: number }>`
+  position: absolute;
+  left: ${({ x }) => x}px;
+  top: ${({ y }) => y}px;
+
+  cursor: grab;
+`
