@@ -20,11 +20,11 @@ interface TableContextType {
   columns: Column[]
   activeColumn: number | null
   isSelected: boolean
+  isEditing: boolean
   columnsRef: React.MutableRefObject<Array<HTMLDivElement | null>>
   updateColumnHeader: (event: ChangeEvent<HTMLInputElement>) => void
-  updateRowContent?: (
+  updateRowContent: (
     event: ChangeEvent<HTMLInputElement>,
-    columnIndex: number,
     rowIndex: number,
   ) => void
   addColumn?: () => void
@@ -33,6 +33,7 @@ interface TableContextType {
   handleColumnSelection: (event: React.MouseEvent, index: number) => void
   changeTitle: (newTitle: string) => void
   changeSelected: (selected: boolean) => void
+  changeEditing: (editing: boolean) => void
 }
 
 interface TableProviderProps {
@@ -48,6 +49,7 @@ export function TableProvider({ children }: TableProviderProps) {
   const [title, setTitle] = useState('Dynamic Table #1')
   const [activeColumn, setActiveColumn] = useState<number | null>(null)
   const [isSelected, setIsSelected] = useState(false)
+  const [isEditing, setIsEditing] = useState(false)
   const columnsRef = useRef<Array<HTMLDivElement | null>>([])
 
   const updateColumnHeader = useCallback(
@@ -66,18 +68,18 @@ export function TableProvider({ children }: TableProviderProps) {
   )
 
   const updateRowContent = useCallback(
-    async (
-      event: ChangeEvent<HTMLInputElement>,
-      columnIndex: number,
-      rowIndex: number,
-    ) => {
+    async (event: ChangeEvent<HTMLInputElement>, rowIndex: number) => {
+      if (activeColumn === null) {
+        return
+      }
+
       const newColumns = [...columns]
 
-      newColumns[columnIndex].row[rowIndex] = event.target.value
+      newColumns[activeColumn].row[rowIndex] = event.target.value
 
       setColumns(newColumns)
     },
-    [columns],
+    [columns, activeColumn],
   )
 
   const addColumn = useCallback(async () => {
@@ -161,6 +163,10 @@ export function TableProvider({ children }: TableProviderProps) {
     setIsSelected(selected)
   }, [])
 
+  const changeEditing = useCallback((editing: boolean) => {
+    setIsEditing(editing)
+  }, [])
+
   return (
     <TableContext.Provider
       value={{
@@ -168,6 +174,7 @@ export function TableProvider({ children }: TableProviderProps) {
         columns,
         activeColumn,
         isSelected,
+        isEditing,
         columnsRef,
         updateColumnHeader,
         updateRowContent,
@@ -177,6 +184,7 @@ export function TableProvider({ children }: TableProviderProps) {
         handleColumnSelection,
         changeTitle,
         changeSelected,
+        changeEditing,
       }}
     >
       {children}

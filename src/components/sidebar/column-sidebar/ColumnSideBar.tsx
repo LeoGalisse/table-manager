@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { Fragment, useContext, useState } from 'react'
 import {
   Aside,
   Button,
@@ -46,6 +46,26 @@ export default function ColumnSideBar() {
             maxLength={25}
             onChange={table.updateColumnHeader}
           />
+        </Dropdown>
+        <Dropdown isClicked={isClicked}>
+          <Label htmlFor="header">Row content</Label>
+          {table.columns[table.activeColumn].row.length > 0 ? (
+            table.columns[table.activeColumn].row.map((row, index) => {
+              return (
+                <Fragment key={index}>
+                  <Label htmlFor="row">Row {index + 1}</Label>
+                  <Input
+                    type="text"
+                    value={row}
+                    maxLength={25}
+                    onChange={(event) => table.updateRowContent(event, index)}
+                  />
+                </Fragment>
+              )
+            })
+          ) : (
+            <div>There is no rows in this column</div>
+          )}
         </Dropdown>
       </Nav>
     </Aside>

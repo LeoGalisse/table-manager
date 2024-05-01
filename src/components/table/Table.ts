@@ -1,20 +1,22 @@
 import styled from 'styled-components'
 
-export const Container = styled.main<{ isSelected: boolean }>`
+export const Container = styled.main<{ isSelected: boolean; length: number }>`
   display: grid;
   position: absolute;
-  grid-template-columns: repeat(8, 100px);
-  grid-template-rows: 1fr 6fr 1fr;
+  grid-template-columns: ${({ length }) =>
+    length < 6 ? 'repeat(8, 100px)' : `repeat(${length + 2}, 150px)`};
+  grid-template-rows: 50px 6fr 50px;
 
-  height: 300px;
+  min-height: 300px;
   outline: ${({ isSelected }) => (isSelected ? '4px solid #cbd5e1' : 'none')};
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 `
 
-export const Header = styled.header`
+export const Header = styled.header<{ length: number }>`
   display: flex;
-  grid-column: span 8;
+  ${({ length }) =>
+    length < 6 ? 'grid-column: span 8' : `grid-column: span ${length + 2}`};
   align-items: center;
 
   padding: 0 8px;
@@ -22,8 +24,9 @@ export const Header = styled.header`
   background-color: white;
 `
 
-export const Nav = styled.nav`
-  grid-column: span 7;
+export const Nav = styled.nav<{ length: number }>`
+  ${({ length }) =>
+    length < 6 ? 'grid-column: span 7' : `grid-column: span ${length + 1}`};
   display: flex;
 `
 
@@ -62,7 +65,6 @@ export const THeader = styled.th<{ isSelected: boolean }>`
 
   width: 100%;
   padding: 4px 8px;
-  outline: ${({ isSelected }) => (isSelected ? '2px solid #60a5fa' : 'none')};
   background-color: ${({ isSelected }) => (isSelected ? '#60a5fa' : '#e2e8f0')};
 `
 
@@ -84,11 +86,13 @@ export const Button = styled.button<{ orientation: 'left' | 'right' }>`
     orientation === 'left' ? '4px 0 0 4px' : '0 4px 4px 0'};
 `
 
-export const TData = styled.td`
+export const TData = styled.td<{ isSelected: boolean }>`
   width: 100%;
   height: 20px;
-  padding: 4px 8px;
-  border: 1px solid #e2e8f0;
+  padding: 0 8px;
+  border: ${({ isSelected }) =>
+    isSelected ? '1px solid #60a5fa' : '1px solid #e2e8f0'};
+
   background-color: white;
 `
 
@@ -105,8 +109,9 @@ export const AddColumnButton = styled.button`
   border-bottom: 2px solid #e2e8f0;
 `
 
-export const Footer = styled.footer`
-  grid-column: span 8;
+export const Footer = styled.footer<{ length: number }>`
+  ${({ length }) =>
+    length < 6 ? 'grid-column: span 8' : `grid-column: span ${length + 2}`};
   display: flex;
 `
 

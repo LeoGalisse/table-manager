@@ -9,6 +9,7 @@ export const Aside = styled.aside`
 
   background-color: white;
   width: 100%;
+  overflow-y: scroll;
 `
 
 export const Header = styled.header`

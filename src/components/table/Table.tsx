@@ -21,9 +21,9 @@ export default function Table() {
   const table = useContext(TableContext)
 
   return (
-    <Container isSelected={table.isSelected}>
-      <Header>{table.title}</Header>
-      <Nav>
+    <Container isSelected={table.isSelected} length={table.columns.length}>
+      <Header length={table.columns.length}>{table.title}</Header>
+      <Nav length={table.columns.length}>
         {table.columns.map((column, index) => {
           return (
             <Column
@@ -57,7 +57,7 @@ export default function Table() {
                 {column.row.map((row, index) => {
                   return (
                     <TRow key={index} isSelected={column.isSelected}>
-                      <TData>{row}</TData>
+                      <TData isSelected={column.isSelected}>{row}</TData>
                     </TRow>
                   )
                 })}
@@ -69,7 +69,7 @@ export default function Table() {
       <Section>
         <AddColumnButton onClick={table.addColumn}>Add column</AddColumnButton>
       </Section>
-      <Footer>
+      <Footer length={table.columns.length}>
         <AddColumnButton onClick={table.addRow}>Add row</AddColumnButton>
       </Footer>
     </Container>
