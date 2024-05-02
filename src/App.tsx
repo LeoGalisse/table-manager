@@ -7,10 +7,10 @@ import {
   InnerContainer,
   Toggle,
 } from './App'
-import ColumnSideBar from './components/sidebar/column-sidebar/ColumnSideBar.tsx'
 import Table from './components/table/Table.tsx'
 import { TableContext } from './context/TableContext.tsx'
 import { Eye, Pencil } from 'lucide-react'
+import PreviewSideBar from './components/sidebar/preview-sidebar/PreviewSideBar.tsx'
 
 export default function App() {
   const [containerPosition, setContainerPosition] = useState({ x: 100, y: 200 })
@@ -58,16 +58,16 @@ export default function App() {
         <ButtonContainer>
           <span>Preview mode</span>
           <Toggle
-            isClicked={table.isEditing}
-            onClick={() => table.changeEditing(!table.isEditing)}
+            isClicked={table.isPreviewMode}
+            onClick={() => table.changeEditing(!table.isPreviewMode)}
           >
-            <DialogButton isClicked={table.isEditing} />
+            <DialogButton isClicked={table.isPreviewMode} />
             <Eye size={20} />
             <Pencil size={16} />
           </Toggle>
         </ButtonContainer>
       </InnerContainer>
-      <ColumnSideBar />
+      <PreviewSideBar />
     </Container>
   )
 }

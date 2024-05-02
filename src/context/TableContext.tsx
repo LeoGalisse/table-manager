@@ -20,7 +20,7 @@ interface TableContextType {
   columns: Column[]
   activeColumn: number | null
   isSelected: boolean
-  isEditing: boolean
+  isPreviewMode: boolean
   columnsRef: React.MutableRefObject<Array<HTMLDivElement | null>>
   updateColumnHeader: (event: ChangeEvent<HTMLInputElement>) => void
   updateRowContent: (
@@ -49,7 +49,7 @@ export function TableProvider({ children }: TableProviderProps) {
   const [title, setTitle] = useState('Dynamic Table #1')
   const [activeColumn, setActiveColumn] = useState<number | null>(null)
   const [isSelected, setIsSelected] = useState(false)
-  const [isEditing, setIsEditing] = useState(false)
+  const [isPreviewMode, setisPreviewMode] = useState(false)
   const columnsRef = useRef<Array<HTMLDivElement | null>>([])
 
   const updateColumnHeader = useCallback(
@@ -164,7 +164,7 @@ export function TableProvider({ children }: TableProviderProps) {
   }, [])
 
   const changeEditing = useCallback((editing: boolean) => {
-    setIsEditing(editing)
+    setisPreviewMode(editing)
   }, [])
 
   return (
@@ -174,7 +174,7 @@ export function TableProvider({ children }: TableProviderProps) {
         columns,
         activeColumn,
         isSelected,
-        isEditing,
+        isPreviewMode,
         columnsRef,
         updateColumnHeader,
         updateRowContent,
