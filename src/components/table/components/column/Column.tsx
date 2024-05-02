@@ -38,12 +38,14 @@ export default function Column({ column, index }: ColumnProps) {
                 ref={(el) => (table.columnsRef.current[index] = el)}
               >
                 <Button
+                  hidden={table.isPreviewMode}
                   orientation="left"
                   onClick={() => table.moveColumn(index, 'left')}
                 >
                   <ArrowLeft size={12} />
                 </Button>
                 <Button
+                  hidden={table.isPreviewMode}
                   orientation="right"
                   onClick={() => table.moveColumn(index, 'right')}
                 >
