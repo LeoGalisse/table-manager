@@ -10,6 +10,11 @@ export const Aside = styled.aside`
   background-color: white;
   width: 100%;
   overflow-y: scroll;
+
+  @media (max-width: 1024px) {
+    grid-column-start: 4;
+    grid-column: span 2;
+  }
 `
 
 export const Header = styled.header`

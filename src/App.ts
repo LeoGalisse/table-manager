@@ -29,7 +29,7 @@ export const ButtonContainer = styled.div`
   border-radius: 8px;
   gap: 12px;
 
-  left: 50%;
+  left: 40%;
   top: 1%;
 `
 
@@ -65,6 +65,10 @@ export const InnerContainer = styled.div`
   width: auto;
   grid-column: span 4;
   position: relative;
+
+  @media (max-width: 1024px) {
+    grid-column: span 3;
+  }
 `
 
 export const Drag = styled.div<{ x: number; y: number }>`

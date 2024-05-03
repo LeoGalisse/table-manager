@@ -1,30 +1,92 @@
-# React + TypeScript + Vite
+# Table Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O Table Manager é um projeto para gerenciamento de tabelas utilizando React e TypeScript.
 
-Currently, two official plugins are available:
+## Instalação
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina.
 
-## Expanding the ESLint configuration
+1. Clone este repositório:
+   ```bash
+   git clone <URL_DO_REPOSITORIO>
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd table-manager
+   ```
+3. Instale as dependências utilizando npm ou yarn:
+   ```bash
+   npm install
+   # ou
+   yarn install
+   # ou
+   pnpm install
+   ```
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## Scripts Disponíveis
 
-- Configure the top-level `parserOptions` property like this:
+No diretório do projeto, você pode executar os seguintes comandos:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
+  ```bash
+   npm run dev
+   # ou
+   yarn dev
+   # ou
+   pnpm dev
+   ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Executa o aplicativo em modo de desenvolvimento.\
+Abra [http://localhost:5173](http://localhost:5173) para visualizá-lo no navegador.
+
+  ```bash
+   npm run test
+   # ou
+   yarn test
+   # ou
+   pnpm test
+   ```
+
+Executa os testes unitários utilizando Jest.
+
+## Tecnologias Utilizadas
+
+- React
+- TypeScript
+- Vite (Bundler)
+- Jest (Framework de Testes)
+- ESLint (Ferramenta de Linting)
+- Prettier (Formatador de código)
+
+# Table Manager - Documentação
+
+## Visão Geral
+
+O Table Manager é uma aplicação para gerenciamento de tabelas construída com React e TypeScript. Ele oferece funcionalidades para visualizar e editar tabelas de dados de forma intuitiva.
+
+## Estrutura do Projeto
+
+O projeto é estruturado da seguinte forma:
+
+- `src/`: Contém o código-fonte da aplicação.
+  - `components/`: Componentes React reutilizáveis.
+  - `tests/`: Contém os testes unitários escritos com Jest.
+  - `context/`: Contextos utilizados para manipulação de dados
+  - `App.tsx`: Ponto de entrada da aplicação.
+
+## Funcionalidades Principais
+
+### 1. Editar Tabela
+
+- Possibilita ao usuário editar os dados da tabela, incluindo adicionar e editar células.
+
+### 2. Visualizar Tabela
+
+- Oferece uma visualização clara e legível da tabela de dados.
+
+## Como Utilizar
+
+1. **Instalação**: Siga as instruções de instalação no README para configurar o ambiente de desenvolvimento.
+
+2. **Execução**: Utilize o comando `npm run dev` ou `yarn dev` para iniciar a aplicação em modo de desenvolvimento.
+
+3. **Interagir**: Abra a aplicação no navegador e utilize as funcionalidades fornecidas para editar e visualizar tabelas de dados.
